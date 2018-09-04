@@ -1,7 +1,8 @@
 # numberPlugin
 Плагин для стилизации input type=number
 
-для подключения плагина добавьте в head
+
+    для подключения плагина добавьте в head
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="number_plugin/number_plugin.js" type="text/javascript"></script>
     <link href="number_plugin/number_plugin.css" type="text/css" rel="stylesheet">
