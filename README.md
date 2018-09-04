@@ -17,7 +17,7 @@
     
 В файле с JavaScript 
 ```jQuery
-//jQuery code
+//js code
 $(document).ready(function () {
     $('.numb').number_plugin();
 });
