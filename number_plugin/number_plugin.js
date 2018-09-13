@@ -7,7 +7,8 @@ version: 1.04
 'Устранён баг с двойным запуском плагина на одной странице'
 version: 1.05
 'Добавлено редактирование с помошью клавиатуры'
-
+version: 1.06
+'Теперь нельзя в поле вводить символы'
 */
 (function( $ ) {
     $(document).on('click', '.plus_plugin_number', function () {
@@ -40,8 +41,19 @@ version: 1.05
             numb.click();
         }
     });
+    $(document).on('keypress', '.input_plugin_number', function () {
+        var thi = $(this);
+        setTimeout(function () {
+            thi.val(thi.attr('value'));
+            thi.val(thi.val().replace(/[a-zA-Z а-яА-Я]/,""));
+            console.log(thi.attr('value'));
+            console.log(thi.val());
+        },100);
+    });
      $(document).on('click', '.input_plugin_number', function () {
          $('.input_plugin_number').change(function(){
+             $(this).val($(this).attr('value'));
+             $(this).val($(this).val().replace(/[a-z A-Zа-яА-Я]/,""));
             var input = $(this).val();
              $(this).val(input);
              $(this).attr('value', input);
