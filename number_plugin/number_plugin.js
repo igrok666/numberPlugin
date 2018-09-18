@@ -1,6 +1,6 @@
 /*
 name project: number_plugin
-version: 1.05
+version: 1.07
 author: https://t.me/Progwtf
 
 version: 1.04
@@ -9,55 +9,88 @@ version: 1.05
 'Добавлено редактирование с помошью клавиатуры'
 version: 1.06
 'Теперь нельзя в поле вводить символы'
+version: 1.07
+'Добавлена команда для включения отрицательных чисел'
+'Добавлена команда установки шага'
+'Исправлен баг для ввода числел с клавиатуры'
+'В следующей версии будет добавлена команда для анимации и задержка анимации'
 */
 (function( $ ) {
+    var negative;
+    var step;
+    // var animate;
+    // var delay;
+
     $(document).on('click', '.plus_plugin_number', function () {
         var input_plugin_number = $(this).parent().find('.input_plugin_number');
         var value = parseInt(input_plugin_number.val());
         var numb = $(this).parent().prev();
-        input_plugin_number.val(value+1);
-        numb.val(value+1);
-        input_plugin_number.attr('value', value+1);
-        numb.val(value+1);
-        numb.attr('value', value+1);
-        console.log(numb.val());
-        numb.click();
+        // if (animate == false){
+            input_plugin_number.val(value+step);
+            numb.val(value+step);
+            input_plugin_number.attr('value', value+step);
+            numb.val(value+step);
+            numb.attr('value', value+step);
+            numb.click();
+        // }
+        // else {
+        //     var valstep = value + step+1;
+        //     var timeout = 0;
+        //     for (var i=value; i< valstep; i++){
+        //         setTimeout((function (m) {
+        //             return function(){
+        //                 input_plugin_number.val(m);
+        //                 numb.val(m);
+        //                 input_plugin_number.attr('value', m);
+        //                 numb.val(m);
+        //                 numb.attr('value', m);
+        //                 numb.click();
+        //             }
+        //         })(i),timeout);
+        //         timeout +=delay;
+        //     }
+        // }
     });
     $(document).on('click', '.minus_plugin_number', function () {
         var input_plugin_number = $(this).parent().find('.input_plugin_number');
         var value = parseInt(input_plugin_number.val());
         var numb = $(this).parent().prev();
-        if (value>1){
-            input_plugin_number.val(value-1);
-            input_plugin_number.attr('value', value-1);
-            numb.val(value-1);
-            numb.attr('value', value-1);
-            numb.click();
-        }else{
-            input_plugin_number.val(value);
-            input_plugin_number.attr('value', value);
-            numb.val(value);
-            numb.attr('value', value);
+        if (negative == false) {
+            if (value > 1 && value > step) {
+                input_plugin_number.val(value - step);
+                input_plugin_number.attr('value', value - step);
+                numb.val(value - step);
+                numb.attr('value', value - step);
+                numb.click();
+            } else {
+                input_plugin_number.val(value);
+                input_plugin_number.attr('value', value);
+                numb.val(value);
+                numb.attr('value', value);
+                numb.click();
+            }
+        }else {
+            input_plugin_number.val(value - step);
+            input_plugin_number.attr('value', value - step);
+            numb.val(value - step);
+            numb.attr('value', value - step);
             numb.click();
         }
     });
     $(document).on('keypress', '.input_plugin_number', function () {
         var thi = $(this);
         setTimeout(function () {
-            thi.val(thi.attr('value'));
             thi.val(thi.val().replace(/[a-zA-Z а-яА-Я]/,""));
-            console.log(thi.attr('value'));
-            console.log(thi.val());
         },100);
+        console.log(thi.val());
     });
      $(document).on('click', '.input_plugin_number', function () {
          $('.input_plugin_number').change(function(){
-             $(this).val($(this).attr('value'));
-             $(this).val($(this).val().replace(/[a-z A-Zа-яА-Я]/,""));
-            var input = $(this).val();
+             $(this).val($(this).val().replace(/[a-zA-Z а-яА-Я]/,""));
+             var input = $(this).val();
              $(this).val(input);
              $(this).attr('value', input);
-            var paren = $(this).parent().prev();
+             var paren = $(this).parent().prev();
              paren.val(input);
              paren.attr('value', input);
     });
@@ -67,12 +100,20 @@ version: 1.06
     $.fn.number_plugin = function(options) {
             var settings = $.extend({
                 'width': '65px',
-                'height': '35px'
+                'height': '35px',
+                'negative' : false,
+                'step' : 1,
+                // 'animate' : false,
+                // 'delay' : false
             }, options);
         return this.each(function() {
             $(this).css('display', 'none');
             if ($(this).siblings('.main_number_plugin').length == 0){
             var value = $(this).val();
+                negative = settings['negative'];
+                step = settings['step'];
+                // animate = settings['animate'];
+                // delay = settings['delay'];
             $(this).after("<div class='main_number_plugin' style='width: " + settings['width'] + "'><input type='text' value='" + value + "' class='input_plugin_number' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
             }
             });
