@@ -1,27 +1,43 @@
 .main_number_plugin{
     position: relative;
 }
+
 .input_plugin_number{
     box-sizing: border-box;
     border-radius: 7px;
     padding-left: 10px;
-    border: 1px solid #969696;
+    border: 1px solid #cccccc;
+    outline: none;
 }
+
+.input_plugin_number:focus {
+    border-color: #bbbbbb;
+}
+
 .plus_plugin_number{
     width: 0px;
     border: 5px solid transparent;
-    border-bottom: 7px solid #848484;
+    border-bottom: 7px solid #b5b5b5;
     position: absolute;
     top: 5%;
     right: 5px;
     cursor: pointer;
 }
+
 .minus_plugin_number{
     width: 0px;
     border: 5px solid transparent;
-    border-top: 7px solid #848484;
+    border-top: 7px solid #b5b5b5;
     position: absolute;
     top: 60%;
     right: 5px;
     cursor: pointer;
+}
+
+.plus_plugin_number:hover {
+    border-bottom-color: #6b6b6b;
+}
+
+.minus_plugin_number:hover {
+    border-top-color: #6b6b6b;
 }

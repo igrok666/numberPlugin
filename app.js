@@ -1,7 +1,7 @@
 $(document).ready(function () {
         $('.numb').number_plugin({
             negative: false,
-            step: 300,
+            step: 1,
             // animate: true,
             // delay: 10,
         });
