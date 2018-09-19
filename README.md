@@ -1,5 +1,6 @@
 # numberPlugin
 Плагин для стилизации input type=number
+Preview link https://igrok666.github.io/
 
 для подключения плагина добавьте в head
 ```html
