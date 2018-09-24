@@ -1,8 +1,10 @@
 $(document).ready(function () {
         $('.numb').number_plugin({
-            negative: false,
-            step: 1,
-            // animate: true,
-            // delay: 10,
+            width: '65px',
+            height: '35px',
+            negative: true,
+            step: 20,
+            animate: true,
+            delay: 100,
         });
     });

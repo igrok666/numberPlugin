@@ -14,13 +14,29 @@ Preview link https://igrok666.github.io/
 Создайте элемент типа input type="number"
 ```html
 //html code
+<div>
 <input type="number" class="numb" id="1" value="1">
+</div>
 ```
-    
+Обратите внимание на то что input-ы должны быть в **разных блоках**!
+
 В файле с JavaScript 
 ```js
 //js code
 $(document).ready(function () {
     $('.numb').number_plugin();
 });
+```
+
+Функции **Number plugin**
+
+```
+$('.numb').number_plugin({
+               width: '65px', //ширина инпута на выводе (по умолчанию 65px редактируется как тут так и через css)
+               height: '35px', //высота инпута на выходе (по умолчанию 35px редактируется как тут так и через css)
+               negative: true, //включение поддержки отрицательных чисел (по умолчанию false)
+               step: 20, //шаг прибавления и убавления (по умолчанию 1)
+               animate: true, //включение анимации прибавления и вычитания (по умолчанию false)
+               delay: 100, //задержка анимации между прибавлениями (по умолчанию 10ms)
+           });
 ```

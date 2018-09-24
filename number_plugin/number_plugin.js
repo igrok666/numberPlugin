@@ -14,54 +14,81 @@ version: 1.07
 'Добавлена команда установки шага'
 'Исправлен баг для ввода числел с клавиатуры'
 'В следующей версии будет добавлена команда для анимации и задержка анимации'
+version 1.08
+'Добавлена функция анимации'
+'Добавлена функция задержки анимации'
 */
 (function( $ ) {
     var negative;
     var step;
-    // var animate;
-    // var delay;
-
+    var animate;
+    var delay;
     $(document).on('click', '.plus_plugin_number', function () {
         var input_plugin_number = $(this).parent().find('.input_plugin_number');
         var value = parseInt(input_plugin_number.val());
         var numb = $(this).parent().prev();
-        // if (animate == false){
+        if (animate === false){
             input_plugin_number.val(value+step);
             numb.val(value+step);
             input_plugin_number.attr('value', value+step);
             numb.val(value+step);
             numb.attr('value', value+step);
             numb.click();
-        // }
-        // else {
-        //     var valstep = value + step+1;
-        //     var timeout = 0;
-        //     for (var i=value; i< valstep; i++){
-        //         setTimeout((function (m) {
-        //             return function(){
-        //                 input_plugin_number.val(m);
-        //                 numb.val(m);
-        //                 input_plugin_number.attr('value', m);
-        //                 numb.val(m);
-        //                 numb.attr('value', m);
-        //                 numb.click();
-        //             }
-        //         })(i),timeout);
-        //         timeout +=delay;
-        //     }
-        // }
+        }
+        else if(animate === true){
+            var valstep = value + step+1;
+            var timeout = 0;
+            if (delay === false){
+                delay = 10;
+            }
+            for (var i=value; i< valstep; i++){
+                setTimeout((function (m) {
+                    return function(){
+                        input_plugin_number.val(m);
+                        numb.val(m);
+                        input_plugin_number.attr('value', m);
+                        numb.val(m);
+                        numb.attr('value', m);
+                        numb.click();
+                    }
+                })(i),timeout);
+                timeout +=delay;
+            }
+        }
     });
     $(document).on('click', '.minus_plugin_number', function () {
         var input_plugin_number = $(this).parent().find('.input_plugin_number');
         var value = parseInt(input_plugin_number.val());
+        console.log(value);
         var numb = $(this).parent().prev();
-        if (negative == false) {
+        if (negative === false) {
             if (value > 1 && value > step) {
-                input_plugin_number.val(value - step);
-                input_plugin_number.attr('value', value - step);
-                numb.val(value - step);
-                numb.attr('value', value - step);
-                numb.click();
+                if (animate === false){
+                    input_plugin_number.val(value - step);
+                    input_plugin_number.attr('value', value - step);
+                    numb.val(value - step);
+                    numb.attr('value', value - step);
+                    numb.click();
+                }else if(animate === true){
+                    var valstep = value - step-1;
+                    var timeout = 0;
+                    if (delay === false){
+                        delay = 10;
+                    }
+                    for (var i=value; i > valstep; i--){
+                        setTimeout((function (m) {
+                            return function(){
+                                input_plugin_number.val(m);
+                                numb.val(m);
+                                input_plugin_number.attr('value', m);
+                                numb.val(m);
+                                numb.attr('value', m);
+                                numb.click();
+                            }
+                        })(i),timeout);
+                        timeout +=delay;
+                    }
+                }
             } else {
                 input_plugin_number.val(value);
                 input_plugin_number.attr('value', value);
@@ -70,11 +97,32 @@ version: 1.07
                 numb.click();
             }
         }else {
-            input_plugin_number.val(value - step);
-            input_plugin_number.attr('value', value - step);
-            numb.val(value - step);
-            numb.attr('value', value - step);
-            numb.click();
+            if (animate === false){
+                input_plugin_number.val(value - step);
+                input_plugin_number.attr('value', value - step);
+                numb.val(value - step);
+                numb.attr('value', value - step);
+                numb.click();
+            }else if(animate === true){
+                var valstep = value - step-1;
+                var timeout = 0;
+                if (delay === false){
+                    delay = 10;
+                }
+                for (var i=value; i > valstep; i--){
+                    setTimeout((function (m) {
+                        return function(){
+                            input_plugin_number.val(m);
+                            numb.val(m);
+                            input_plugin_number.attr('value', m);
+                            numb.val(m);
+                            numb.attr('value', m);
+                            numb.click();
+                        }
+                    })(i),timeout);
+                    timeout +=delay;
+                }
+            }
         }
     });
     $(document).on('keypress', '.input_plugin_number', function () {
@@ -103,8 +151,8 @@ version: 1.07
                 'height': '35px',
                 'negative' : false,
                 'step' : 1,
-                // 'animate' : false,
-                // 'delay' : false
+                'animate' : false,
+                'delay' : false
             }, options);
         return this.each(function() {
             $(this).css('display', 'none');
@@ -112,9 +160,9 @@ version: 1.07
             var value = $(this).val();
                 negative = settings['negative'];
                 step = settings['step'];
-                // animate = settings['animate'];
-                // delay = settings['delay'];
-            $(this).after("<div class='main_number_plugin' style='width: " + settings['width'] + "'><input type='text' value='" + value + "' class='input_plugin_number' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
+                animate = settings['animate'];
+                delay = settings['delay'];
+            $(this).after("<div class='main_number_plugin' style='width: " + settings['width'] + "'><input type='text' pattern='[0­9]*' value='" + value + "' class='input_plugin_number' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
             }
             });
     };
