@@ -23,10 +23,16 @@ version 1.08
     var step;
     var animate;
     var delay;
+    var max;
     $(document).on('click', '.plus_plugin_number', function () {
         var input_plugin_number = $(this).parent().find('.input_plugin_number');
         var value = parseInt(input_plugin_number.val());
         var numb = $(this).parent().prev();
+        if (max){
+            if (value+1 > max) {
+                return;
+            }
+        }
         if (animate === false){
             input_plugin_number.val(value+step);
             numb.val(value+step);
@@ -152,7 +158,8 @@ version 1.08
                 'negative' : false,
                 'step' : 1,
                 'animate' : false,
-                'delay' : false
+                'delay' : false,
+                'max': false
             }, options);
         return this.each(function() {
             $(this).css('display', 'none');
@@ -162,6 +169,7 @@ version 1.08
                 step = settings['step'];
                 animate = settings['animate'];
                 delay = settings['delay'];
+                max = settings['max'];
             $(this).after("<div class='main_number_plugin' style='width: " + settings['width'] + "'><input type='text' pattern='[0­9]*' value='" + value + "' class='input_plugin_number' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
             }
             });
