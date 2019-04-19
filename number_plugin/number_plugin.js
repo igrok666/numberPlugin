@@ -1,29 +1,17 @@
 /*
 name project: number_plugin
-version: 1.07
+version: 1.09
 author: https://t.me/Progwtf
-
-version: 1.04
-'Устранён баг с двойным запуском плагина на одной странице'
-version: 1.05
-'Добавлено редактирование с помошью клавиатуры'
-version: 1.06
-'Теперь нельзя в поле вводить символы'
-version: 1.07
-'Добавлена команда для включения отрицательных чисел'
-'Добавлена команда установки шага'
-'Исправлен баг для ввода числел с клавиатуры'
-'В следующей версии будет добавлена команда для анимации и задержка анимации'
-version 1.08
-'Добавлена функция анимации'
-'Добавлена функция задержки анимации'
+Присылайте свои предложения по доработке этого плагина и разработке других плагинов
 */
+
 (function( $ ) {
     var negative;
     var step;
     var animate;
     var delay;
     var max;
+    var min;
     $(document).on('click', '.plus_plugin_number', function () {
         var input_plugin_number = $(this).parent().find('.input_plugin_number');
         var value = parseInt(input_plugin_number.val());
@@ -42,12 +30,17 @@ version 1.08
             numb.click();
         }
         else if(animate === true){
-            var valstep = value + step+1;
+            var valstep = value + step;
             var timeout = 0;
+            if(max){
+                if(valstep > max){
+                    valstep = max;
+                }
+            }
             if (delay === false){
                 delay = 10;
             }
-            for (var i=value; i< valstep; i++){
+            for (var i=value; i<= valstep; i++){
                 setTimeout((function (m) {
                     return function(){
                         input_plugin_number.val(m);
@@ -65,8 +58,12 @@ version 1.08
     $(document).on('click', '.minus_plugin_number', function () {
         var input_plugin_number = $(this).parent().find('.input_plugin_number');
         var value = parseInt(input_plugin_number.val());
-        console.log(value);
         var numb = $(this).parent().prev();
+        if (min){
+            if (value-1 < min) {
+                return;
+            }
+        }
         if (negative === false) {
             if (value > 1 && value > step) {
                 if (animate === false){
@@ -76,12 +73,17 @@ version 1.08
                     numb.attr('value', value - step);
                     numb.click();
                 }else if(animate === true){
-                    var valstep = value - step-1;
+                    var valstep = value - step;
                     var timeout = 0;
+                    if(min){
+                        if(valstep < min){
+                            valstep = min;
+                        }
+                    }
                     if (delay === false){
                         delay = 10;
                     }
-                    for (var i=value; i > valstep; i--){
+                    for (var i=value; i >= valstep; i--){
                         setTimeout((function (m) {
                             return function(){
                                 input_plugin_number.val(m);
@@ -108,14 +110,16 @@ version 1.08
                 input_plugin_number.attr('value', value - step);
                 numb.val(value - step);
                 numb.attr('value', value - step);
-                numb.click();
             }else if(animate === true){
-                var valstep = value - step-1;
+                var valstep = value - step;
                 var timeout = 0;
+                if(valstep < min){
+                    valstep = min;
+                }
                 if (delay === false){
                     delay = 10;
                 }
-                for (var i=value; i > valstep; i--){
+                for (var i=value; i >= valstep; i--){
                     setTimeout((function (m) {
                         return function(){
                             input_plugin_number.val(m);
@@ -159,7 +163,8 @@ version 1.08
                 'step' : 1,
                 'animate' : false,
                 'delay' : false,
-                'max': false
+                'max': false,
+                'min': false
             }, options);
         return this.each(function() {
             $(this).css('display', 'none');
@@ -170,6 +175,11 @@ version 1.08
                 animate = settings['animate'];
                 delay = settings['delay'];
                 max = settings['max'];
+                min = settings['min'];
+                if(value < min){
+                    value = min;
+                    $(this).val(min);
+                }
             $(this).after("<div class='main_number_plugin' style='width: " + settings['width'] + "'><input type='text' pattern='[0­9]*' value='" + value + "' class='input_plugin_number' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
             }
             });
