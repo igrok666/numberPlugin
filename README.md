@@ -1,6 +1,8 @@
 # numberPlugin
 Плагин для стилизации input type=number
 
+Web-site https://number-plugin.na4u.ru
+
 Preview link https://igrok666.github.io/
 
 для подключения плагина добавьте в head
