@@ -16,9 +16,9 @@ Preview link https://igrok666.github.io/
 //html code
 <div>
 <input type="number" class="numb" id="1" value="1">
+<input type="number" class="numb" id="2" value="1">
 </div>
 ```
-Обратите внимание на то что input-ы должны быть в **разных блоках**!
 
 В файле с JavaScript 
 ```js

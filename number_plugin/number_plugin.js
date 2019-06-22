@@ -1,6 +1,6 @@
 /*
 name project: number_plugin
-version: 1.09
+version: 1.10
 author: https://t.me/Progwtf
 Присылайте свои предложения по доработке этого плагина и разработке других плагинов
 */
@@ -167,6 +167,7 @@ author: https://t.me/Progwtf
                 'min': false
             }, options);
         return this.each(function() {
+            $(this).wrap('<div></div>')
             $(this).css('display', 'none');
             if ($(this).siblings('.main_number_plugin').length == 0){
             var value = $(this).val();

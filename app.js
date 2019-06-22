@@ -3,7 +3,7 @@ $(document).ready(function () {
             width: '65px',
             height: '35px',
             negative: true,
-            step: 20,
+            step: 1,
             animate: true,
             delay: 100,
         });
