@@ -1,6 +1,6 @@
 /*
 name project: number_plugin
-version: 1.10
+version: 1.12
 author: https://t.me/Progwtf
 Присылайте свои предложения по доработке этого плагина и разработке других плагинов
 */
@@ -164,7 +164,8 @@ author: https://t.me/Progwtf
                 'animate' : false,
                 'delay' : false,
                 'max': false,
-                'min': false
+                'min': false,
+                'class' : false
             }, options);
         return this.each(function() {
             $(this).wrap('<div></div>')
@@ -177,11 +178,17 @@ author: https://t.me/Progwtf
                 delay = settings['delay'];
                 max = settings['max'];
                 min = settings['min'];
+                custom_class = settings['class'];
                 if(value < min){
                     value = min;
                     $(this).val(min);
                 }
-            $(this).after("<div class='main_number_plugin' style='width: " + settings['width'] + "'><input type='text' pattern='[0­9]*' value='" + value + "' class='input_plugin_number' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
+                if(custom_class === false){
+                    $(this).after("<div class='main_number_plugin' style='width: " + settings['width'] + "'><input type='text' pattern='[0­9]*' value='" + value + "' class='input_plugin_number' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
+                }else{
+                    $(this).after("<div class='main_number_plugin' style='width: " + settings['width'] + "'><input type='text' pattern='[0­9]*' value='" + value + "' class='input_plugin_number " + custom_class + "' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
+                }
+
             }
             });
     };

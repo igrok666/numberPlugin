@@ -6,5 +6,6 @@ $(document).ready(function () {
             step: 1,
             animate: true,
             delay: 100,
+            class: 'custom',
         });
     });
