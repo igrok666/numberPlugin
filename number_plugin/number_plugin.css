@@ -2,7 +2,7 @@
     position: relative;
 }
 
-.input_plugin_number{
+.classic .input_plugin_number{
     box-sizing: border-box;
     border-radius: 7px;
     padding-left: 10px;
@@ -10,11 +10,11 @@
     outline: none;
 }
 
-.input_plugin_number:focus {
+.classic .input_plugin_number:focus {
     border-color: #bbbbbb;
 }
 
-.plus_plugin_number{
+.classic .plus_plugin_number{
     width: 0px;
     border: 5px solid transparent;
     border-bottom: 7px solid #b5b5b5;
@@ -24,7 +24,7 @@
     cursor: pointer;
 }
 
-.minus_plugin_number{
+.classic .minus_plugin_number{
     width: 0px;
     border: 5px solid transparent;
     border-top: 7px solid #b5b5b5;
@@ -34,10 +34,74 @@
     cursor: pointer;
 }
 
-.plus_plugin_number:hover {
+.classic .plus_plugin_number:hover {
     border-bottom-color: #6b6b6b;
 }
 
-.minus_plugin_number:hover {
+.classic .minus_plugin_number:hover {
+    border-top-color: #6b6b6b;
+}
+
+
+.line{
+	width: 140px !important;
+	display: flex;
+    justify-content: center;
+}
+
+.line .input_plugin_number{
+    box-sizing: border-box;
+    border-radius: 7px;
+    padding-left: 10px;
+    border: 1px solid #cccccc;
+    outline: none;
+}
+
+.line .input_plugin_number:focus {
+    border-color: #bbbbbb;
+}
+
+.line .plus_plugin_number{
+    width: 30px;
+    height: 31px;
+    border: 1px solid #0000007a;
+    border-radius: 3px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+	background-color: #e2d22b6e;
+}
+
+.line .plus_plugin_number:before{
+	content: '+';
+    position: absolute;
+    top: 23%;
+    left: 37%;
+}
+
+.line .minus_plugin_number{
+    width: 30px;
+    height: 31px;
+    border: 1px solid #0000007a;
+    border-radius: 3px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+	background-color: #e2d22b6e;
+}
+.line .minus_plugin_number:before{
+	content: '-';
+    position: absolute;
+    top: 17%;
+    left: 41%;
+}
+
+.line .plus_plugin_number:hover {
+    border-bottom-color: #6b6b6b;
+}
+
+.line .minus_plugin_number:hover {
     border-top-color: #6b6b6b;
 }
