@@ -18,7 +18,8 @@ author: https://t.me/Progwtf
         var numb = $(this).parent().prev();
         if (max) {
             if (value + 1 > max) {
-                return;
+                input_plugin_number.val(max);
+                input_plugin_number.attr('value', max);
             }
         }
         if (animate === false) {
@@ -60,7 +61,8 @@ author: https://t.me/Progwtf
         var numb = $(this).parent().prev();
         if (min) {
             if (value - 1 < min) {
-                return;
+                input_plugin_number.val(min);
+                input_plugin_number.attr('value', min);
             }
         }
         if (negative === false) {
@@ -134,12 +136,19 @@ author: https://t.me/Progwtf
             }
         }
     });
-    $(document).on('keypress', '.input_plugin_number', function () {
+    $(document).on('keyup', '.input_plugin_number', function () {
         var thi = $(this);
         setTimeout(function () {
             thi.val(thi.val().replace(/[a-zA-Z а-яА-Я]/, ""));
         }, 100);
-        console.log(thi.val());
+        if (parseFloat(thi.val()) > max){
+            thi.val(max);
+            thi.attr('value', max);
+        }
+        if (thi.val() < min){
+            thi.val(min);
+            thi.attr('value', min);
+        }
     });
     $(document).on('click', '.input_plugin_number', function () {
         $('.input_plugin_number').change(function () {
@@ -184,9 +193,9 @@ author: https://t.me/Progwtf
                     $(this).val(min);
                 }
                 if (custom_class === false) {
-                    $(this).after("<div class='main_number_plugin " + settings['style'] + "' style='width: " + settings['width'] + "'><input type='text' pattern='[0­9]*' value='" + value + "' class='input_plugin_number' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
+                    $(this).after("<div class='main_number_plugin " + settings['style'] + "' style='width: " + settings['width'] + "'><input type='text' min='"+settings['min']+"' max='"+settings['max']+"' pattern='[0­9]*' value='" + value + "' class='input_plugin_number' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
                 } else {
-                    $(this).after("<div class='main_number_plugin " + settings['style'] + "' style='width: " + settings['width'] + "'><input type='text' pattern='[0­9]*' value='" + value + "' class='input_plugin_number " + custom_class + "' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
+                    $(this).after("<div class='main_number_plugin " + settings['style'] + "' style='width: " + settings['width'] + "'><input type='text' min='"+settings['min']+"' max='"+settings['max']+"' pattern='[0­9]*' value='" + value + "' class='input_plugin_number " + custom_class + "' style='width: " + settings['width'] + "; height: " + settings['height'] + "'><div class='plus_plugin_number'></div><div class='minus_plugin_number'></div></div>");
                 }
 
             }
