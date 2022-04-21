@@ -2,6 +2,7 @@
 Плагин для стилизации input type=number
 
 Web-site https://1c-dev.ru/number-plugin/
+
 Preview link https://igrok666.github.io/
 
 для подключения плагина добавьте в head
